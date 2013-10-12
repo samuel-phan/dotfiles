@@ -4,4 +4,6 @@
 [alias]
 	co = checkout
 	br = branch
-    pr = pull --rebase
+	pr = pull --rebase
+[core]
+	editor = vim
