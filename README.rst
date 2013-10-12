@@ -1,7 +1,13 @@
 My dot files
 ============
 
-Installation:
+Installation (**read-only**)::
 
   git clone https://github.com/samuel-phan/dotfiles.git ~/.dotfiles
-  sh ~/.dotfiles/install.sh
+  ~/.dotfiles/install.py
+
+Installation (**read-write**)::
+
+  git clone git@github.com:samuel-phan/vimfiles.git ~/.dotfiles
+  ~/.dotfiles/install.py
+

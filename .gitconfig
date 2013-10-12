@@ -1,0 +1,7 @@
+[user]
+	name = Samuel PHAN
+	email = samuel@quoonel.com
+[alias]
+	co = checkout
+	br = branch
+    pr = pull --rebase
