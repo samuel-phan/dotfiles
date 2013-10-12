@@ -1,2 +1,6 @@
 # define a bigger scrollback, default is 100 lines
 defscrollback 2000
+
+# look and feel
+caption always "%{= bb}%{+b w}%n %t %h %=%l %H %c"
+hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
