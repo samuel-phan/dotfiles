@@ -8,6 +8,6 @@ Installation (**read-only**)::
 
 Installation (**read-write**)::
 
-  git clone git@github.com:samuel-phan/vimfiles.git ~/.dotfiles
+  git clone git@github.com:samuel-phan/dotfiles.git ~/.dotfiles
   ~/.dotfiles/install.py
 
