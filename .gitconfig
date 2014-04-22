@@ -4,3 +4,6 @@
 	pr = pull --rebase
 [core]
 	editor = vim
+[color]
+    grep = true
+    diff = true
