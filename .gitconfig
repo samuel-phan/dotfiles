@@ -7,3 +7,5 @@
 [color]
     grep = true
     diff = true
+[push]
+	default = simple
