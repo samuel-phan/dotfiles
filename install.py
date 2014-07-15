@@ -3,6 +3,7 @@
 from __future__ import print_function
 import glob
 import os
+import shutil
 import sys
 
 
@@ -78,6 +79,15 @@ def main(argv):
                     sys.exit(1)
             else:
                 create_symlink(symlink_target, symlink)
+
+    # htoprc
+    htoprc_source = os.path.join(dot_dir, 'htoprc')
+    htop_dir = os.path.join(home_dir, '.config', 'htop')
+    htoprc_target = os.path.join(htop_dir, 'htoprc')
+    print('Copy the "%s" -> "%s".' % (htoprc_source, htoprc_target))
+    if not os.path.exists(htop_dir):
+        os.makedirs(htop_dir)
+    shutil.copy2(htoprc_source, htoprc_target)
 
     print('Done.')
 
