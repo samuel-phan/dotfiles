@@ -2,6 +2,7 @@
 	co = checkout
 	br = branch
     pr = pull --rebase
+    tree = log --graph --oneline --decorate --all
 [core]
 	editor = vim
 [color]
