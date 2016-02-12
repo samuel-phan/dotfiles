@@ -6,8 +6,7 @@
 [core]
 	editor = vim
 [color]
-    grep = true
-    diff = true
+    ui = auto
 [user]
 	name = Samuel Phan
 	email = samuel@quoonel.com
