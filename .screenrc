@@ -5,9 +5,7 @@ startup_message off
 defscrollback 5000
 
 # allow scrollback integration with gnome-terminal
-termcapinfo xterm-unicode ti@:te@
-termcapinfo xterm ti@:te@
-termcapinfo xterm 'hs:ts=\E]2;:fs=07:ds=\E]2;screen07'
+termcapinfo xterm* ti@:te@
 
 # look and feel
 caption always "%{= bb}%{+b w}%n %t %h %=%l %H %c"
