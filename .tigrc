@@ -1,2 +1,4 @@
+set ignore-case = smart-case
+
 bind main ! !git revert %(commit)
 bind diff 7 !git diff %(commit)^ %(commit)
