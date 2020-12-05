@@ -31,12 +31,14 @@ PS1="$prefix $suffix "
 # git prompt config
 
 # needed for "sudo su"
-if ! function_exists __git_ps1; then
+if ! function_exists __git_ps1 && [ -f /etc/bash_completion.d/git-prompt ]; then
     . /etc/bash_completion.d/git-prompt
 fi
 
-export GIT_PS1_SHOWCOLORHINTS=1
-export GIT_PS1_SHOWDIRTYSTATE=1 GIT_PS1_SHOWSTASHSTATE=1 GIT_PS1_SHOWUNTRACKEDFILES=1
-export GIT_PS1_SHOWUPSTREAM=verbose GIT_PS1_DESCRIBE_STYLE=branch
+if function_exists __git_ps1; then
+    export GIT_PS1_SHOWCOLORHINTS=1
+    export GIT_PS1_SHOWDIRTYSTATE=1 GIT_PS1_SHOWSTASHSTATE=1 GIT_PS1_SHOWUNTRACKEDFILES=1
+    export GIT_PS1_SHOWUPSTREAM=verbose GIT_PS1_DESCRIBE_STYLE=branch
 
-export PROMPT_COMMAND="__git_ps1 \"$prefix\" \" $suffix \"; set_title \"\u@\h: \w\""
+    export PROMPT_COMMAND="__git_ps1 \"$prefix\" \" $suffix \"; set_title \"\u@\h: \w\""
+fi
