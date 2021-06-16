@@ -18,7 +18,7 @@ git-clean-branches() {
     git branch -vv
     echo '--- scan gone branches to remove'
     for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
-        read "REPLY?Remove the branch \"$branch\"? (y/n) "
+        read -p "Remove the branch \"$branch\"? (y/n) " REPLY
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             echo "Remove \"$branch\"..."
             git branch -d "$branch" || return $?
