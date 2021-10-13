@@ -21,7 +21,13 @@ git-clean-branches() {
         read -p "Remove the branch \"$branch\"? (y/n) " REPLY
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             echo "Remove \"$branch\"..."
-            git branch -d "$branch" || return $?
+            if ! git branch -d "$branch"; then
+                read -p "Force remove the branch \"$branch\"? (y/n) " REPLY
+                if [[ $REPLY =~ ^[Yy]$ ]]; then
+                    echo "Force remove \"$branch\"..."
+                    git branch -D "$branch" || return $?
+                fi
+            fi
         else
             echo "Skipped."
         fi
