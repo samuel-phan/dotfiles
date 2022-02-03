@@ -6,10 +6,12 @@ export PYTHONSTARTUP=~/.pyrc
 
 # git
 git-clean-branches() {
+    local main_branch
+    (git branch | grep -q 'main$') && main_branch=main || main_branch=master
     echo '--- git branch -vv'
     git branch -vv
-    echo '--- git checkout master'
-    git checkout master || return $?
+    echo "--- git checkout ${main_branch}"
+    git checkout "${main_branch}" || return $?
     echo '--- git pull --rebase'
     git pull --rebase || return $?
     echo '--- git fetch -p'
@@ -18,14 +20,14 @@ git-clean-branches() {
     git branch -vv
     echo '--- scan gone branches to remove'
     for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
-        read -p "Remove the branch \"$branch\"? (y/n) " REPLY
+        read "REPLY?Remove the branch \"$branch\"? (y/n) "
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             echo "Remove \"$branch\"..."
             if ! git branch -d "$branch"; then
-                read -p "Force remove the branch \"$branch\"? (y/n) " REPLY
+                read "REPLY?Force remove the branch \"$branch\"? (y/n) "
                 if [[ $REPLY =~ ^[Yy]$ ]]; then
                     echo "Force remove \"$branch\"..."
-                    git branch -D "$branch" || return $?
+                    git branch -D "$branch"
                 fi
             fi
         else
