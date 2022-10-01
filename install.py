@@ -28,57 +28,26 @@ def main(argv):
             continue
 
         print('Check for "%s" ...' % rc_filename, end=' ')
-        if rc_filename == '.bashrc':
-            # append this at the end of the .bashrc: ". ~/.dotfiles/.bashrc"
-            bashrc_file = os.path.join(home_dir, rc_filename)  # /home/user/.bashrc
-            source_cmd = '. %s' % (os.path.join('~', os.path.basename(dot_dir), '.bashrc'))  # eg: ". ~/.dotfiles/.bashrc
-            if not os.path.exists(bashrc_file):
-                with open(bashrc_file, 'w'):
-                    pass
 
-            if (os.path.islink(bashrc_file) and
-                    os.path.abspath(os.path.join(os.path.dirname(bashrc_file), os.readlink(bashrc_file))) == os.path.abspath(rc_file)):
-                print('Skipped: "%s" is a symlink -> "%s".' % (bashrc_file, os.readlink(bashrc_file)))
-                continue
-
-            found = False
-            with open(bashrc_file) as fh:
-                for line in fh:
-                    if line.strip() == source_cmd:
-                        found = True
-                        break
-
-            if found:
-                # nothing to do
-                print('Found the bashrc sourcing in "%s"' % bashrc_file)
-            else:
-                # append to ~/.bashrc
-                print('Append bashrc sourcing to "%s"' % bashrc_file)
-                with open(bashrc_file, 'a') as fh:
-                    fh.write('\n')
-                    fh.write('# bashrc customization\n')
-                    fh.write(source_cmd)
-
-        else:
-            # default action: create a symlink
-            symlink = os.path.join(home_dir, rc_filename)  # eg: /home/user/.pyrc
-            symlink_target = os.path.join(os.path.basename(os.path.dirname(rc_file)), rc_filename)  # eg: .dotfiles/.pyrc
-            if os.path.lexists(symlink):
-                # already exists
-                if os.path.islink(symlink):
-                    if os.readlink(symlink) != symlink_target:
-                        if get_overwrite_answer('Symlink "%s" -> "%s" already exists. Overwrite? (y)es or [Enter] / (Y)es to all / (n)o / (N)o to all / (a)bort: ' % (symlink, os.readlink(symlink))):
-                            create_symlink(symlink_target, symlink, overwrite=True)
-                    else:
-                        print('OK.')
-                elif os.path.isfile(symlink):
-                    if get_overwrite_answer('File "%s" already exists. Overwrite? (y)es or [Enter] / (Y)es to all / (n)o / (N)o to all / (a)bort: ' % symlink):
+        # default action: create a symlink
+        symlink = os.path.join(home_dir, rc_filename)  # eg: /home/user/.pyrc
+        symlink_target = os.path.join(os.path.basename(os.path.dirname(rc_file)), rc_filename)  # eg: .dotfiles/.pyrc
+        if os.path.lexists(symlink):
+            # already exists
+            if os.path.islink(symlink):
+                if os.readlink(symlink) != symlink_target:
+                    if get_overwrite_answer('Symlink "%s" -> "%s" already exists. Overwrite? (y)es or [Enter] / (Y)es to all / (n)o / (N)o to all / (a)bort: ' % (symlink, os.readlink(symlink))):
                         create_symlink(symlink_target, symlink, overwrite=True)
-                elif os.path.isdir(symlink):
-                    print('Directory "%s" already exists. Do something about it. Abort.' % symlink)
-                    sys.exit(1)
-            else:
-                create_symlink(symlink_target, symlink)
+                else:
+                    print('OK.')
+            elif os.path.isfile(symlink):
+                if get_overwrite_answer('File "%s" already exists. Overwrite? (y)es or [Enter] / (Y)es to all / (n)o / (N)o to all / (a)bort: ' % symlink):
+                    create_symlink(symlink_target, symlink, overwrite=True)
+            elif os.path.isdir(symlink):
+                print('Directory "%s" already exists. Do something about it. Abort.' % symlink)
+                sys.exit(1)
+        else:
+            create_symlink(symlink_target, symlink)
 
     # htoprc
     htoprc_source = os.path.join(dot_dir, 'htoprc')
