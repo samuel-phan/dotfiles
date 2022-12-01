@@ -158,11 +158,11 @@ git-clean-branches() {
     git branch -vv
     echo '--- scan gone branches to remove'
     for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
-        read "REPLY?Remove the branch \"$branch\"? (y/n) "
+        read -p "Remove the branch \"$branch\"? (y/n) " REPLY
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             echo "Remove \"$branch\"..."
             if ! git branch -d "$branch"; then
-                read "REPLY?Force remove the branch \"$branch\"? (y/n) "
+                read -p "Force remove the branch \"$branch\"? (y/n) " REPLY
                 if [[ $REPLY =~ ^[Yy]$ ]]; then
                     echo "Force remove \"$branch\"..."
                     git branch -D "$branch"
