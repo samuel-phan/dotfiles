@@ -40,5 +40,11 @@ if function_exists __git_ps1; then
     export GIT_PS1_SHOWDIRTYSTATE=1 GIT_PS1_SHOWSTASHSTATE=1 GIT_PS1_SHOWUNTRACKEDFILES=1
     export GIT_PS1_SHOWUPSTREAM=verbose GIT_PS1_DESCRIBE_STYLE=branch
 
-    export PROMPT_COMMAND="__git_ps1 \"$prefix\" \" $suffix \"; set_title \"\u@\h: \w\""
+    export PROMPT_COMMAND='
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        prefix="($(basename "$VIRTUAL_ENV")) $prefix"
+    fi
+    __git_ps1 "$prefix" " $suffix "
+    set_title "\u@\h: \w"
+    '
 fi
