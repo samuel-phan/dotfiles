@@ -118,6 +118,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# pbcopy / pbpaste
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
+
 # Terraform
 #complete -C /usr/bin/terraform terraform
 
