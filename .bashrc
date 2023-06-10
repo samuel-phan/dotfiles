@@ -128,6 +128,9 @@ export PATH=~/go/bin:$PATH
 # Python
 export PYTHONSTARTUP=~/.pyrc
 
+# Podman
+export DOCKER_HOST="unix://$(podman info -f "{{.Host.RemoteSocket.Path}}")"
+
 # kubectx and kubens
 export PATH=~/.kubectx:$PATH
 export KUBECTX_CURRENT_FGCOLOR=$(tput bold)$(tput setaf 3)
