@@ -1,15 +1,17 @@
 [alias]
-  co = checkout
-  br = branch
-  pr = pull --rebase
-  lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	co = checkout
+	br = branch
+	pr = pull --rebase
+	lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
 [core]
-  editor = vim
+	editor = vim
 [color]
-  ui = auto
+	ui = auto
 [user]
-  name = Samuel Phan
-  email = samuel@quoonel.com
+	name = Samuel Phan
+	email = samuel@quoonel.com
 [push]
-  default = simple
-  autoSetupRemote = true
+	default = simple
+	autoSetupRemote = true
+[pager]
+	branch = false
