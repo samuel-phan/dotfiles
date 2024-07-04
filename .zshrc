@@ -145,3 +145,6 @@ git-clean-branches() {
     git branch -vv
 }
 
+# tenv
+export TENV_AUTO_INSTALL=true
+
