@@ -126,6 +126,9 @@ export LSCOLORS=Exgxcxdxbxegedabagacad
 # aws
 complete -C '/opt/homebrew/bin/aws_completer' aws
 
+# flux
+. <(flux completion zsh)
+
 # git
 git-clean-branches() {
     local main_branch
