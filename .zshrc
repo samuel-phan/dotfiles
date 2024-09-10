@@ -80,6 +80,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# Homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -110,6 +114,13 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# shell
+export PATH=$HOME/.local/bin:$PATH
+
+# aws
+export AWS_PROFILE=AdministratorAccess-856697610288
+complete -C '/usr/local/bin/aws_completer' aws
 
 # git
 git-clean-branches() {
@@ -144,6 +155,16 @@ git-clean-branches() {
     echo '--- git branch -vv'
     git branch -vv
 }
+
+# kubectl
+export KUBECONFIG="${KUBECONFIG}:${HOME}/.kube/config.eks:${HOME}/.kube/config.hidora"
+
+# Set the kubectl completion code for zsh[1] to autoload on startup
+kubectl completion zsh > "${fpath[1]}/_kubectl"
+alias k=kubectl
+
+# krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # tenv
 export TENV_AUTO_INSTALL=true
