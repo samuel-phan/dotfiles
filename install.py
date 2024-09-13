@@ -16,6 +16,7 @@ OVERWRITE_TO_ALL = ''  # can be: 'y', 'n', '' (ask)
 def main(argv):
     dot_dir = os.path.dirname(os.path.abspath(__file__))
     home_dir = os.path.dirname(dot_dir)
+    config_dir = os.path.join(home_dir, '.config')
 
     print('Home directory: %s' % home_dir)
     print('Dot directory: %s' % dot_dir)
@@ -51,12 +52,18 @@ def main(argv):
 
     # htoprc
     htoprc_source = os.path.join(dot_dir, 'htoprc')
-    htop_dir = os.path.join(home_dir, '.config', 'htop')
+    htop_dir = os.path.join(config_dir, 'htop')
     htoprc_target = os.path.join(htop_dir, 'htoprc')
     print('Copy the "%s" -> "%s".' % (htoprc_source, htoprc_target))
     if not os.path.exists(htop_dir):
         os.makedirs(htop_dir)
     shutil.copy2(htoprc_source, htoprc_target)
+
+    # redshift
+    redshiftconf_source = os.path.join(dot_dir, 'redshift.conf')
+    redshiftconf_target = os.path.join(config_dir, 'redshift.conf')
+    print('Copy the "%s" -> "%s".' % (redshiftconf_source, redshiftconf_target))
+    shutil.copy2(redshiftconf_source, redshiftconf_target)
 
     print('Done.')
 
