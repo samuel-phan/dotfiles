@@ -59,12 +59,6 @@ def main(argv):
         os.makedirs(htop_dir)
     shutil.copy2(htoprc_source, htoprc_target)
 
-    # redshift
-    redshiftconf_source = os.path.join(dot_dir, 'redshift.conf')
-    redshiftconf_target = os.path.join(config_dir, 'redshift.conf')
-    print('Copy the "%s" -> "%s".' % (redshiftconf_source, redshiftconf_target))
-    shutil.copy2(redshiftconf_source, redshiftconf_target)
-
     print('Done.')
 
 
