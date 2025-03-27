@@ -122,6 +122,9 @@ export PATH=$HOME/.local/bin:$PATH
 export AWS_PROFILE=AdministratorAccess-856697610288
 complete -C '/usr/local/bin/aws_completer' aws
 
+# gcloud
+source /usr/share/google-cloud-sdk/completion.zsh.inc
+
 # git
 git-clean-branches() {
     local main_branch
@@ -155,6 +158,9 @@ git-clean-branches() {
     echo '--- git branch -vv'
     git branch -vv
 }
+
+# Go
+export PATH=$PATH:/usr/local/go/bin
 
 # kubectl
 export KUBECONFIG="${KUBECONFIG}:${HOME}/.kube/config.eks:${HOME}/.kube/config.hidora"
